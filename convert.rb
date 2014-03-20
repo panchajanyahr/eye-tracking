@@ -5,7 +5,7 @@ puts "Converting"
 
 data_points = []
 
-File.open("input/original.txt").each_line { |line|
+File.open("original.txt").each_line { |line|
   data = JSON.parse(line)
   if data["category"] == "tracker"
     point = []

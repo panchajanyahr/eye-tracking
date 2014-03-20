@@ -19,11 +19,11 @@ var tracker = (function() {
     return {
         setDuration: function(duration) {
             xScale = d3.scale.linear()
-                .domain([0, 3600])
+                .domain([0, 1920])
                 .range([0,1066]);
 
             yScale = d3.scale.linear()
-                .domain([0, 3600])
+                .domain([0, 1080])
                 .range([0,600]);
 
             colorScale = d3.scale.linear()
@@ -41,7 +41,6 @@ var tracker = (function() {
                 point.psize = parseInt(point.psize);
                 return point;
             });
-
         },
 
         update: function() {
@@ -51,8 +50,6 @@ var tracker = (function() {
 
             var currentTime = $("video")[0].currentTime;
             var point = matching(currentTime);
-            console.log("Current", currentTime);
-            console.log("Point", point.timestamp);
 
             if (point) {
                 d3.select("svg circle")
