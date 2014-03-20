@@ -1,7 +1,22 @@
+body {
+    background-color: gray;
+}
+
+.container {
+    width: 1066;
+    margin: 0 auto;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+}
 .frame {
     position:relative;
+    margin-top: 15px;
     width:1066;
     height:600;
+    border: 1px solid black;
 }
 
 .frame video {
