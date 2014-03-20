@@ -51,8 +51,11 @@ var tracker = (function() {
             var point = matching(currentTime);
 
             if (point) {
+                var transitionTime = (point.timestamp - currentTime) * 1000;
+
                 d3.select("svg circle")
                     .transition()
+                    .duration(transitionTime)
                     .attr("cx", xScale(point.x))
                     .attr("cy", yScale(point.y))
                     .style("fill", colorScale(point.psize));
