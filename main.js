@@ -2,6 +2,14 @@ var tracker = (function() {
     var xScale, yScale, colorScale;
     var dataPoints;
 
+    xScale = d3.scale.linear()
+        .domain([0, 1920])
+        .range([0,1066]);
+    
+    yScale = d3.scale.linear()
+        .domain([0, 1080])
+        .range([0,600]);
+
     var matching = function(current) {
         var result;
 
@@ -17,20 +25,6 @@ var tracker = (function() {
     };
 
     return {
-        setDuration: function(duration) {
-            xScale = d3.scale.linear()
-                .domain([0, 1920])
-                .range([0,1066]);
-
-            yScale = d3.scale.linear()
-                .domain([0, 1080])
-                .range([0,600]);
-
-            colorScale = d3.scale.linear()
-                .domain([0, 50])
-                .range(['white', 'blue'])
-        },
-
         setDataPoints: function(_dataPoints) {
             var start = parseInt(_dataPoints[0].timestamp);
 
@@ -41,6 +35,11 @@ var tracker = (function() {
                 point.psize = parseInt(point.psize);
                 return point;
             });
+
+            colorScale = d3.scale.linear()
+                .domain(d3.extent(dataPoints, function(p) { return p.psize; }))
+                .range(['white', 'blue'])
+
         },
 
         update: function() {
@@ -76,8 +75,6 @@ $(function() {
             var fileURL = URL.createObjectURL(file);
             videoNode.src = fileURL;
         }
-
-        tracker.setDuration($('video').duration);
     };
 
     updateDataPoints = function(event) {
